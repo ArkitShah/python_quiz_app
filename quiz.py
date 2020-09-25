@@ -1,7 +1,5 @@
 import random
-import re
-import tkinter
-from tkinter import *
+from tkinter import Label, Radiobutton, IntVar, PhotoImage, Button, FLAT
 import csv
 
 
