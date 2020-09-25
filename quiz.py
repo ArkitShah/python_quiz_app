@@ -4,18 +4,28 @@ import tkinter
 from tkinter import *
 import csv
 
+
 global user_answer, correct_answer
 indexes = []
 user_answer = []
 questions = []
 answers_choice = []
 correct_answer = []
-with open('quiz.txt') as file:
-    for line in file:
-        search_result = re.search(r'^[0-9]+. startq\((.*)\)endq startop\((.*)\)endop answer\(([0-3])\)$', line)
-        questions.append(search_result.group(1))
-        answers_choice.append(search_result.group(2).split(','))
-        correct_answer.append(int(search_result.group(3)))
+
+
+with open('quiz.csv', 'r') as file:
+    reader = csv.reader(file)
+    header = 0
+    column_names = []
+    for row in reader:
+        if header == 0:
+            column_names.append(row)
+            header = 1
+        else:
+            questions.append(row[1])
+            temp = [row[2], row[3], row[4], row[5]]
+            answers_choice.append(temp)
+            correct_answer.append(int(row[6]))
 
 
 def generate_question_numbers():
